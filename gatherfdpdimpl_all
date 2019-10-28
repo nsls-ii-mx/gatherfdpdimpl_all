@@ -4,11 +4,11 @@ if [ "${1}xx" == "--helpxx" ];
   then
     echo "gatherfdpdim_all -- gather files from fast_dp and dimple runs with all HKL"
     echo "usage:"
-    echo "    gatherfdpdim --help      print this message"
-    echo "    gatherfdpdim             gather from current directory and below"
-    echo "    gatherfdp projectdir     gather from projectdir and below"
+    echo "    gatherfdpdim_all --help      print this message"
+    echo "    gatherfdpdim_all             gather from current directory and below"
+    echo "    gatherfdpdim_all projectdir  gather from projectdir and below"
     echo " creates ./fast_dp_dir /fast_dp_dir/XDS and ./dimple_dir"
-    echo " looks for fast_dp.log, fast_dp.mtx, final.mtz, final.pdb, screen.log"
+    echo " looks for fast_dp.log, fast_dp.mtz, final.mtz, final.pdb, screen.log"
     echo "           XDS_ASCII.HKL, INTEGRATE.HKL"
     echo " and puts the first two into fast_dp_dir, the next three into dimple_dir,"
     echo "           and the two HKL files into fast_dp_dir/XDS"
@@ -112,7 +112,7 @@ for fndfile  in ${foundarray[@]} ;  do
     echo $fndfile
     abspath=${projectdir}/${fndfile}
     abspath=$( cd $(dirname $abspath); pwd)/$( basename $fndfile)
-    targetfile=fast_dp_dir/XDS/`echo $fndfile|sed 's/\//-/g'|sed 's/^\.-//'|sed 's/\.HKL/_is\.hkl/'`
+    targetfile=fast_dp_dir/XDS/`echo $fndfile|sed 's/\//-/g'|sed 's/^\.-//'|sed 's/INTEGRATE\.HKL/_is\.hkl/'`
     echo cp -p "$abspath" "$targetfile"
     cp -p "$abspath" "$targetfile"
 done
